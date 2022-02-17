@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { setOffDarkMode, setOnDarkMode } from './redux/actions/themeActions';
 
-function App() {
+const App = () => {
+  const { darkMode } = useSelector((state) => state.darkMode); // state = store global
+  const dispatch = useDispatch();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>
+        {darkMode === true
+          ? 'DarkMode ON'
+          : darkMode === false
+          ? 'DarkMode OFF'
+          : 'No Seteado'}
+      </h1>
+      <button onClick={() => dispatch(setOnDarkMode())}>
+        Habilitar DarkMode
+      </button>
+      <button onClick={() => dispatch(setOffDarkMode())}>
+        Deshabilitar DarkMode
+      </button>
+    </>
   );
-}
+};
 
 export default App;
